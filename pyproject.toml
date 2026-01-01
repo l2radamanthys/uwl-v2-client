@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "uwl-v2-client"
-version = "0.0.1"
+version = "0.1.1"
 authors = [
   { name="Ricardo Daniel Quiroga", email="l2radamanthys@gmail.com" },
 ]
