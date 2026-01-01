@@ -3,7 +3,7 @@ from unittest.mock import Mock, patch, MagicMock
 import datetime
 import json
 from requests.exceptions import RequestException
-from wheaterlink_client.wheaterlink import UWLClient, UWLClientError
+from uwl_client import UWLClient, UWLClientError
 
 
 class TestWLClientInitialization:

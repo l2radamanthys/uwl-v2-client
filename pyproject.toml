@@ -28,3 +28,8 @@ Issues = "https://github.com/l2radamanthys/uwl-v2-client/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+]

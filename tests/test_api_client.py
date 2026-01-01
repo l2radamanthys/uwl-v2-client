@@ -5,7 +5,7 @@ from requests.exceptions import ConnectionError, Timeout, RequestException
 import requests
 
 
-from wheaterlink_client.client import ApiClient
+from uwl_client.client import ApiClient
 
 
 class TestApiClientInitialization:
