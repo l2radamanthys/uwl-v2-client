@@ -31,5 +31,6 @@ where = ["src"]
 
 [dependency-groups]
 dev = [
+    "build>=1.2.2.post1",
     "pytest>=8.3.5",
 ]
