@@ -72,6 +72,13 @@ For official support and documentation, please refer to:
 
 ### From GitHub
 
+Install from PyPI:
+
+```bash
+pip install uwl-v2-client
+```
+
+
 Install directly from the GitHub repository:
 
 ```bash
