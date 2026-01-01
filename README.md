@@ -1,32 +1,35 @@
-# Wheaterlink V2 API
+# UWL v2 Client
 
-Unoficial [Wheaterlink V2 API](https://weatherlink.github.io/v2-api/api-reference) Client
+An **unofficial Python client** for the [WeatherLink v2 API](https://weatherlink.github.io/v2-api/api-reference).
 
-Usage:
+This library provides a simple and Pythonic interface to retrieve **stations, sensors, and historical weather data** from the WeatherLink v2 API.
 
-    from wheaterlink import WLClient
+---
 
-    client = WLClient(api_key, api_secret)
+## Disclaimer
 
-    stations = client.get_stations()
+This project is an **independent and unofficial implementation** of the WeatherLink v2 API client.
 
-    station_id = 129681
-    start = datetime.datetime.strptime("20/02/2022 00:00:00", "%d/%m/%Y %H:%M:%S")
-    end = start + relativedelta(days=1)
+It is **not affiliated with, maintained by, or endorsed by Davis Instruments**.  
+All trademarks, service marks, and product names are the property of their respective owners.
 
-    data = client.get_historic(station_id, start, end)
+The WeatherLink API may change without notice, which could affect the functionality of this library.  
+Use this software **at your own risk**.
 
+---
 
-Availabled method list:
+## Features
 
-## Methadata
+- Retrieve stations linked to your WeatherLink account
+- Access sensor metadata and activity
+- Query historical weather data by station and time range
+- Optional access to raw API responses
 
-- `WLClient.get_stations(raw_content=False)`
-- `WLClient.get_sensors(raw_content=False)`
-- `WLClient.get_sensor_activity(raw_content=False)`
-- `WLClient.get_sensor_catalog(sensor_type=None, raw_content=False)`
+---
 
-### Wheather Data
+## Requirements
 
-- `WLClient.get_historic(station_id, start, end, raw_content=False)`
+- Python 3.8+
+- requests
+- python-dateutil
 
