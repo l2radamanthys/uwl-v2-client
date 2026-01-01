@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -13,13 +13,18 @@ readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
 dependencies = [
     "requests",
     "python-dateutil",
 ]
+
+[project.urls]
+Homepage = "https://github.com/l2radamanthys/uwl-v2-client"
+Issues = "https://github.com/l2radamanthys/uwl-v2-client/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
