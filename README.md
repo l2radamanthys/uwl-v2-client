@@ -103,7 +103,7 @@ pip install -e ".[dev]"
 ## 🎯 Quick Start
 
 ```python
-from uwl_v2_client import UWLClient
+from uwl_client import UWLClient
 import datetime
 
 # Initialize the client
@@ -168,7 +168,7 @@ WEATHERLINK_API_SECRET=your_api_secret_here
 ```python
 import os
 from dotenv import load_dotenv
-from uwl_v2_client import UWLClient
+from uwl_client import UWLClient
 
 load_dotenv()
 
