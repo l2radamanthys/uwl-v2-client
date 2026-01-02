@@ -139,7 +139,11 @@ class UWLClient(ApiClient):
                 raise
             raise UWLClientError(f"Error obteniendo estaciones: {str(e)}")
     
-    def get_sensors(self, raw_content: bool = False) -> Union[requests.Response, List[Dict]]:
+    def get_sensors(
+        self,
+        sensors_ids: Optional[List[Union[str, int]]] = None,
+        raw_content: bool = False
+    ) -> Union[requests.Response, List[Dict]]:
         """
         Obtiene la lista de sensores disponibles
         
@@ -152,19 +156,27 @@ class UWLClient(ApiClient):
         Raises:
             UWLClientError: Si hay un error en la petición
         """
+        query_params = self.base_query_params.copy()
+        if sensors_ids is not None and len(sensors_ids) > 0:
+            query_params["sensors-ids"] = ",".join([str(sid) for sid in sensors_ids])
         try:
-            response = self.get_request("/sensors", params=self.base_query_params)
+            response = self.get_request("/sensors", query_params)
             return self._handle_response(response, data_key="sensors", raw_content=raw_content)
         except Exception as e:
             if isinstance(e, UWLClientError):
                 raise
             raise UWLClientError(f"Error obteniendo sensores: {str(e)}")
     
-    def get_sensor_activity(self, raw_content: bool = False) -> Union[requests.Response, List[Dict]]:
+    def get_sensor_activity(
+        self,
+        sensors_ids: Optional[List[Union[str, int]]] = None,
+        raw_content: bool = False
+    ) -> Union[requests.Response, List[Dict]]:
         """
         Obtiene la actividad de los sensores
         
         Args:
+            sensors_ids: Lista de IDs de sensores específicos
             raw_content: Si True, retorna el objeto Response completo
             
         Returns:
@@ -173,8 +185,12 @@ class UWLClient(ApiClient):
         Raises:
             UWLClientError: Si hay un error en la petición
         """
+        query_params = self.base_query_params.copy()
+        if sensors_ids is not None and len(sensors_ids) > 0:
+            query_params["sensors-ids"] = ",".join([str(sid) for sid in sensors_ids])
+
         try:
-            response = self.get_request("/sensor-activity", params=self.base_query_params)
+            response = self.get_request("/sensor-activity", params=query_params)
             return self._handle_response(
                 response,
                 data_key="sensor_activity",
@@ -362,3 +378,16 @@ class UWLClient(ApiClient):
             if isinstance(e, UWLClientError):
                 raise
             raise UWLClientError(f"Error obteniendo datos actuales: {str(e)}")
+
+    def nodes(
+        self,
+        nodes_ids: Optional[List[Union[str, int]]] = None,
+    ):
+        UWLClientError("Not implemented yet")
+
+    def report_et(
+        self,
+        station_id: Union[str, int],
+        raw_content: bool = False,
+    ):
+        UWLClientError("Not implemented yet")
