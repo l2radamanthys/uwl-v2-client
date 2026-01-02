@@ -47,8 +47,8 @@ class UWLClient(ApiClient):
         }
 
     def _handle_response(
-        self, 
-        response: requests.Response, 
+        self,
+        response: requests.Response,
         data_key: Optional[str] = None,
         raw_content: bool = False
     ) -> Union[requests.Response, Dict, List]:
@@ -105,21 +105,30 @@ class UWLClient(ApiClient):
             return [int(sid) for sid in sensors]
         return [int(sensors)]
 
-    def get_stations(self, raw_content: bool = False) -> Union[requests.Response, List[Dict]]:
+    def get_stations(
+            self, 
+            raw_content: bool = False,
+            demo: bool = False
+        ) -> Union[requests.Response, List[Dict]]:
         """
         Obtiene la lista de estaciones meteorológicas
         
         Args:
             raw_content: Si True, retorna el objeto Response completo
-            
+            demo: Si True, retorna adicionalmente las estaciones de prueba
+
         Returns:
             Lista de estaciones o Response completo
             
         Raises:
             UWLClientError: Si hay un error en la petición
         """
+        query_params = self.base_query_params.copy()
+        if demo:
+            params["demo"] = "true"
+
         try:
-            response = self.get_request("/stations", params=self.base_query_params)
+            response = self.get_request("/stations", params=query_params)
             return self._handle_response(
                 response, 
                 data_key="stations", 
@@ -226,7 +235,8 @@ class UWLClient(ApiClient):
         start: datetime.datetime,
         end: datetime.datetime,
         sensors: Union[str, int, List[Union[str, int]]] = "all",
-        raw_content: bool = False
+        raw_content: bool = False,
+        demo: bool = False
     ) -> Union[requests.Response, List[Dict]]:
         """
         Obtiene datos históricos de una estación
@@ -258,6 +268,8 @@ class UWLClient(ApiClient):
                 "start-timestamp": start_ts,
                 "end-timestamp": end_ts,
             }
+            if demo:
+                query_params["demo"] = True
             
             # Realizar petición
             response = self.get_request(
@@ -319,7 +331,8 @@ class UWLClient(ApiClient):
     def get_current(
         self,
         station_id: Union[str, int],
-        raw_content: bool = False
+        raw_content: bool = False,
+        demo: bool = False
     ) -> Union[requests.Response, Dict]:
         """
         Obtiene las condiciones actuales de una estación
@@ -339,7 +352,9 @@ class UWLClient(ApiClient):
                 "api-key": self.get_config("api_key"),
                 "station-id": station_id,
             }
-            
+            if demo:
+                query_params["demo"] = True
+
             response = self.get_request("/current/{station_id}", params=query_params)
             return self._handle_response(response, raw_content=raw_content)
             
